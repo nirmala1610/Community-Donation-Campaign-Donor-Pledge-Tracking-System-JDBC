@@ -140,13 +140,13 @@ Verify changes directly in Oracle DB
 
 📂 Project Structure
 
-com.donate
-│
-├── app        → Main console application
-├── bean       → Entity classes
-├── dao        → Data Access Objects
-├── service    → Business logic & validations
-└── util       → DB utility & custom exceptions
+                com.donate
+                │
+                ├── app        → Main console application
+                ├── bean       → Entity classes
+                ├── dao        → Data Access Objects
+                ├── service    → Business logic & validations
+                └── util       → DB utility & custom exceptions
 
 🎯 Learning Outcomes
 
