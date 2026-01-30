@@ -139,6 +139,7 @@ View console output for operation status
 Verify changes directly in Oracle DB
 
 📂 Project Structure
+
 com.donate
 │
 ├── app        → Main console application
