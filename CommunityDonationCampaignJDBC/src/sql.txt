@@ -1,0 +1,62 @@
+ sqlplus donate_user/levi1610@XEPDB1
+ 
+ CREATE USER donate_user IDENTIFIED BY donate_pwd; 
+ GRANT CONNECT, RESOURCE TO donate_user; 
+ 
+CREATE TABLE DONOR_TBL(
+ DonorID VARCHAR2(12) PRIMARY KEY,
+ FullName VARCHAR2(150),
+ Email VARCHAR2(120),
+ Mobile VARCHAR2(20) ,
+ City VARCHAR2(100) ,
+ Status VARCHAR2(20)
+);
+
+INSERT INTO DONOR_TBL(DonorID,FullName,Email,Mobile,City,Status)
+VALUES ('DNR1001','Rahul Mehta','rahulmehta@gmail.com','9876500001','Chennai','ACTIVE');
+
+INSERT INTO DONOR_TBL(DonorID,FullName,Email,Mobile,City,Status)
+VALUES ('DNR1002','Priya Sharam','PriyaSharam@gmail.com','9876500002','Bengaluru','ACTIVE');
+
+INSERT INTO DONOR_TBL(DonorID,FullName,Email,Mobile,City,Status)
+VALUES ('DNR1003','Arjun Nair','ArjunNaira@gmail.com','9876500004','Coimbatore','ACTIVE');
+
+CREATE TABLE CAMPAIGN_TBL(
+ CampaignID VARCHAR2(12) PRIMARY KEY,
+ CampaignName VARCHAR2(200),
+ StartDate DATE,
+ EndDate DATE,
+ TargetAmount NUMBER(12,2),
+ Status VARCHAR2(20)
+);
+
+INSERT INTO CAMPAIGN_TBL(CampaignID,CampaignName,StartDate,EndDate,TargetAmount,Status)
+VALUES('CMP2025A','Back-to School Kit Drive 2025',TO_DATE('2025-05-01','YYYY-MM-DD'),TO_DATE('2025-06-15','YYYY-MM-DD'),500000.00,'ACTIVE');
+
+INSERT INTO CAMPAIGN_TBL(CampaignID,CampaignName,StartDate,EndDate,TargetAmount,Status)
+VALUES('CMP2025B','Winter Blanket Distribution 2025',TO_DATE('2025-06-01','YYYY-MM-DD'),TO_DATE('2025-07-15','YYYY-MM-DD'),300000.00,'PLANNED');
+
+CREATE TABLE PLEDGE_TBL(
+ PledgeID NUMBER(10) PRIMARY KEY,
+ DonorID VARCHAR2(12) REFERENCES DONOR_TBL(DonorID),
+ CampaignID VARCHAR2(12) REFERENCES CAMPAIGN_TBL(CampaignID),
+ PledgeDate DATE,
+ PledgeAmount NUMBER(12,2),
+ AmountPaid NUMBER(12,2),
+ PaymentStatus VARCHAR2(20),
+ WriteoffFlag VARCHAR2(3)
+);
+
+INSERT INTO PLEDGE_TBL(PledgeID,DonorID,CampaignID,PledgeDate,PledgeAmount,AmountPaid,PaymentStatus,WriteoffFlag)
+VALUES('910001','DNR1001','CMP2025A',TO_DATE('2025-05-05','YYYY-MM-DD'),10000.00,4000.0,'PARTIALLY_PAID','NO');
+
+INSERT INTO PLEDGE_TBL(PledgeID,DonorID,CampaignID,PledgeDate,PledgeAmount,AmountPaid,PaymentStatus,WriteoffFlag)
+VALUES('910002','DNR1002','CMP2025A',TO_DATE('2025-05-08','YYYY-MM-DD'),5000.00,5000.0,'FULLY_PAID','NO');
+
+CREATE SEQUENCE pledgeId_seql
+                START WITH 1000
+                MINVALUE 1000
+                MAXVALUE 9999
+                INCREMENT BY 1;
+                
+                
